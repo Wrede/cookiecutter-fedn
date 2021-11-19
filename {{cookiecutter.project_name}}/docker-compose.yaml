@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  client0:
+    environment:
+      - GET_HOSTS_FROM=dns
+    image: {{cookiecutter.docker_image}}
+    build:
+      context: .
+    working_dir: /app
+    command: /bin/bash -c "fedn run client -in client.yaml"
+    volumes:
+      - {{cookiecutter.data_directory}}:/app/data:ro #mount as READ ONLY
+      - ./client.yaml:/app/client.yaml
